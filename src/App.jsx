@@ -1,11 +1,12 @@
 import { useState } from "react";
-
+import Navbar from "./componesnts/Navbar";
 function App() {
   return (
-    <div>
-      <h1>Welcome to My E-commerce Store</h1>
+    <>
+    <Navbar />
+      <h1>Welcome to ABShopZone</h1>
       <p>Our shopping journey starts here!</p>
-    </div>
+    </>
   );
 }
 
