@@ -1,5 +1,5 @@
+import { NavLink } from "react-router-dom";
 import "../styles/navbar.css";
-
 function Navbar() {
   return (
     <nav>
@@ -7,15 +7,16 @@ function Navbar() {
         <h2>ABShopZone</h2>
       </div>
       <ul>
-        <li>Home</li>
-        <li>Products</li>
-        <li>Categories</li>
-        <li>About</li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/products">Products</NavLink></li>
+        <li><NavLink to="/categories">Categories</NavLink></li>
+        <li><NavLink to="/about">About</NavLink></li>
       </ul>
 
       <div className="nav-icons">
-        <span>♡</span>
-        <span>🛒</span>
+        <NavLink to="/favourites">♡</NavLink>
+        <NavLink to="/cart">🛒</NavLink>
+
       </div>
     </nav>
   );
