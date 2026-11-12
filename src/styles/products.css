@@ -198,3 +198,50 @@
 .cart-btn:hover {
   background: #1d4ed8;
 }
+
+/* for search  */
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.search-box {
+  position: relative;
+  width: 100%;
+  max-width: 550px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 15px 20px 15px 50px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(79, 70, 229, 0.15),
+    0 10px 30px rgba(79, 70, 229, 0.2);
+  transform: scale(1.02);
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
