@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { getProducts } from "../services/productApi";
 import "../styles/products.css";
-import ProductCard from "../componesnts/ProductCard";
+import ProductCard from "../components/ProductCard";
 
 function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
+  // Store the currently selected product category.
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   const fetchProducts = async () => {
     try {
@@ -25,14 +27,28 @@ function Products() {
     fetchProducts();
   }, []);
 
-  // Filter products based on the user's search input.
+  // Extract the unique categories from the products return by the api
 
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(search.toLowerCase()),
-  );
+  const categories = ["all", ...new Set(products.map((item) => item.category))];
+
+  // Filter products by both selected category and search text.
+
+  const filteredProducts = products.filter((product) => {
+    // check wether the product belongs to the slected category.
+    const matchesCategory =
+      selectedCategory === "all" || product.category === selectedCategory;
+
+    // Check whether the product title matches the search text.
+    const matchesSearch = product.title
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    // Keep products that match both conditions.
+    return matchesCategory && matchesSearch;
+  });
 
   if (loading) {
-    return <p className="Loading Products">Products Loading............... </p>;
+    return <p className="loading">Products Loading............... </p>;
   }
   if (error) {
     return <p className="error-loading">{error}</p>;
@@ -42,7 +58,21 @@ function Products() {
     <div className="products-container">
       <h1 className="page-title">Our Products</h1>
       <p className="page-subtitle">Explore our latest products.</p>
-
+      {/* Allow customer to select a product cateogry.  */}
+      <div className="category-filter">
+        <label htmlFor="category">Filter by category: </label>
+        <select
+          id="category"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category === "all" ? "All Categories" : category}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className="search-container">
         <div className="search-box">
           <span className="search-icon">🔍</span>
