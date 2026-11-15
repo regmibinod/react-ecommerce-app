@@ -10,6 +10,8 @@ function Products() {
   const [search, setSearch] = useState("");
   // Store the currently selected product category.
   const [selectedCategory, setSelectedCategory] = useState("all");
+  // Store the sorting option selected by the customer
+  const [sortOption, setSortOption] = useState("default");
 
   const fetchProducts = async () => {
     try {
@@ -47,6 +49,20 @@ function Products() {
     return matchesCategory && matchesSearch;
   });
 
+  // Sort the filtered products without modifying the original array.
+
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    switch (sortOption) {
+     case "price-low-high" : return a.price - b.price;
+     case "price-high-low" : return b.price - a.price;
+     case "name-a-z" : return a.title.localeCompare(b.title);
+     case "name-z-a" : return b.title.localeCompare(a.title)
+
+     // keep the original order when no sorting option is  selected
+     default : return 0;
+    }
+  });
+
   if (loading) {
     return <p className="loading">Products Loading............... </p>;
   }
@@ -73,6 +89,24 @@ function Products() {
           ))}
         </select>
       </div>
+      {/* Allow customers to sort products. */}
+      {/* Allow customers to sort products. */}
+      <div className="sort-filter">
+        <label htmlFor="sort">Sort products: </label>
+
+        <select
+          id="sort"
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+        >
+          <option value="default">Default</option>
+          <option value="price-low-high">Price: Low to High</option>
+          <option value="price-high-low">Price: High to Low</option>
+          <option value="name-a-z">Name: A to Z</option>
+          <option value="name-z-a">Name: Z to A</option>
+        </select>
+      </div>
+      {/* Allow user to search product */}
       <div className="search-container">
         <div className="search-box">
           <span className="search-icon">🔍</span>
@@ -88,8 +122,8 @@ function Products() {
 
       <div className="products-grid">
         {/* Display a product or an empty state message */}
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
+        {sortedProducts.length > 0 ? (
+          sortedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         ) : (
