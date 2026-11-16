@@ -13,6 +13,12 @@ function Products() {
   // Store the sorting option selected by the customer
   const [sortOption, setSortOption] = useState("default");
 
+  // Track the currently selected products page.
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Number of products displayed an each page.
+  const productsPerPage = 8;
+  // Product fetching from api and setting in the product state
   const fetchProducts = async () => {
     try {
       const data = await getProducts();
@@ -28,6 +34,11 @@ function Products() {
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  // Reset Pagination whenever search, category or sorting changes.
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, search, sortOption]);
 
   // Extract the unique categories from the products return by the api
 
@@ -53,16 +64,40 @@ function Products() {
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch (sortOption) {
-     case "price-low-high" : return a.price - b.price;
-     case "price-high-low" : return b.price - a.price;
-     case "name-a-z" : return a.title.localeCompare(b.title);
-     case "name-z-a" : return b.title.localeCompare(a.title)
+      case "price-low-high":
+        return a.price - b.price;
+      case "price-high-low":
+        return b.price - a.price;
+      case "name-a-z":
+        return a.title.localeCompare(b.title);
+      case "name-z-a":
+        return b.title.localeCompare(a.title);
 
-     // keep the original order when no sorting option is  selected
-     default : return 0;
+      // keep the original order when no sorting option is  selected
+      default:
+        return 0;
     }
   });
 
+// Calculate the total number of pages required.
+const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
+
+// Keep the current page within the available page range.
+useEffect(() => {
+  if (currentPage > totalPages && totalPages > 0) {
+    setCurrentPage(totalPages);
+  }
+}, [currentPage, totalPages]);
+
+// Calculate the starting and ending positions of the current page.
+const indexOfLastProduct = currentPage * productsPerPage;
+const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+
+// Get only the products that belong to the current page.
+const currentProducts = sortedProducts.slice(
+  indexOfFirstProduct,
+  indexOfLastProduct,
+);
   if (loading) {
     return <p className="loading">Products Loading............... </p>;
   }
@@ -89,7 +124,7 @@ function Products() {
           ))}
         </select>
       </div>
-      {/* Allow customers to sort products. */}
+ 
       {/* Allow customers to sort products. */}
       <div className="sort-filter">
         <label htmlFor="sort">Sort products: </label>
@@ -121,15 +156,39 @@ function Products() {
       </div>
 
       <div className="products-grid">
-        {/* Display a product or an empty state message */}
-        {sortedProducts.length > 0 ? (
-          sortedProducts.map((product) => (
+        {/* Display a products for the currently selected page. */}
+        {currentProducts.length > 0 ? (
+          currentProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         ) : (
           <p>No Products found. Try a different search.</p>
         )}
       </div>
+      {/* Start of pagination controls */}
+
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+
+          <button
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
+      {/* End of pagination controls */}
     </div>
   );
 }
