@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
-import { testproducts } from "../services/productApi";
+
 function Home() {
   const [products, setProducts] = useState([]);
   const [sort, setSortItem] = useState("default");
 
   useEffect(() => {
-    setProducts(testproducts);
+   
   }, []);
   const filteredProducts = products.sort((a, b) => {
     if (sort === "hightolow") {

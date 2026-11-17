@@ -1,5 +1,5 @@
-import "../styles/productcard.css"
-
+import { Link } from "react-router-dom";
+import "../styles/productcard.css";
 import { CartContext } from "../context/CartContex";
 import { useContext } from "react";
 function ProductCard({ product }) {
@@ -7,21 +7,25 @@ function ProductCard({ product }) {
 
   return (
     <div>
-      <div key={product.id} className="product-card">
+      <div className="product-card">
         <div className="product-image-wrapper">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="product-image"
-          />
+          <Link to={`/products/${product.id}`}>
+            <img
+              src={product.image}
+              alt={product.title}
+              className="product-image"
+            />
+          </Link>
 
           <button className="favorite-btn">❤️</button>
         </div>
 
         <div className="product-content">
-          <span className="product-category">{product.title}</span>
+          <span className="product-category">{product.category}</span>
 
-          <h2 className="product-name">{product.name}</h2>
+          <Link to={`/products/${product.id}`}>
+            <h2 className="product-name">{product.title}</h2>
+          </Link>
 
           <div className="product-rating">
             ⭐ {product.rating.rate}
