@@ -73,6 +73,12 @@ export function CartProvider({ children }) {
 
   //   End  of function decrement of the cart
 
+  // Clear all products from the shopping cart after an order is placed.
+
+const clearCart = ()=>{
+  setCart([]);
+}
+
   return (
     <CartContext.Provider
       value={{
@@ -81,6 +87,7 @@ export function CartProvider({ children }) {
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
+        clearCart
       }}
     >
       {children}

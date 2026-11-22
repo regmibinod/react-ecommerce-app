@@ -1,0 +1,145 @@
+/* ===== Page wrapper =====
+   The page's outer <div> has no class, so we target "the div that
+   directly contains .display". This keeps h1 and p styles from
+   leaking into other pages. */
+
+div:has(> .display) {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 48px 20px 64px;
+}
+
+div:has(> .display) > h1 {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 2.2rem;
+  color: #111827;
+}
+
+div:has(> .display) > p {
+  margin: 0 0 32px;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* ===== Card ===== */
+
+.display {
+  background: #ffffff;
+  border-radius: 20px;
+  border-top: 6px solid #4f46e5;
+  padding: 32px;
+  box-shadow: 0 12px 40px rgba(17, 24, 39, 0.1);
+}
+
+.display h2 {
+  margin: 0 0 24px;
+  padding-bottom: 14px;
+  border-bottom: 2px dashed #e5e7eb;
+
+  font-size: 1.25rem;
+  color: #111827;
+}
+
+/* ===== Form: labels and inputs stack in one column ===== */
+
+.display form {
+  display: flex;
+  flex-direction: column;
+}
+
+.display label {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* space between one input and the next label */
+.display input + label {
+  margin-top: 20px;
+}
+
+.display input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+
+  font-size: 1rem;
+  color: #111827;
+  background: #f9fafb;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.display input::placeholder {
+  color: #9ca3af;
+}
+
+.display input:hover {
+  border-color: #a5b4fc;
+}
+
+.display input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+}
+
+/* red border only after the user typed something invalid (e.g. bad email) */
+.display input:not(:placeholder-shown):invalid {
+  border-color: #f87171;
+}
+
+/* ===== Button ===== */
+
+.display button {
+  margin-top: 28px;
+  padding: 16px 24px;
+
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.display button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.4);
+}
+
+.display button:active {
+  transform: translateY(0);
+}
+
+.display button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.3);
+}
+
+/* ===== Mobile ===== */
+
+@media (max-width: 520px) {
+  div:has(> .display) {
+    padding: 28px 12px 48px;
+  }
+
+  div:has(> .display) > h1 {
+    font-size: 1.7rem;
+  }
+
+  .display {
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+}

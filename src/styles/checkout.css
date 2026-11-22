@@ -1,0 +1,352 @@
+/* ===== Page layout =====
+   Children of .checkout-container: h1, p, form, .order-summary.
+   Title and subtitle span the top; form sits left, summary sits right. */
+
+.checkout-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 64px;
+
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  column-gap: 28px;
+  align-items: start;
+}
+
+.checkout-container > h1 {
+  grid-column: 1 / -1;
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 2.2rem;
+  color: #111827;
+}
+
+.checkout-container > p {
+  grid-column: 1 / -1;
+  margin: 0 0 36px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.checkout-container > form {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ===== Form cards ===== */
+
+.customer-information,
+.shipping-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Shipping card title */
+.shipping-info h2 {
+  grid-column: 1 / -1;
+  margin: 0 0 4px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e5e7eb;
+
+  font-size: 1.3rem;
+  color: #111827;
+}
+
+/* Contact card: Full Name takes the whole row (email + phone share a row) */
+.customer-information > div:nth-of-type(1) {
+  grid-column: 1 / -1;
+}
+
+/* Shipping card: Street Address and Country take the whole row
+   (city + postcode share a row) */
+.shipping-info > div:nth-of-type(1),
+.shipping-info > div:nth-of-type(4) {
+  grid-column: 1 / -1;
+}
+
+/* ===== Labels and inputs ===== */
+
+.customer-information > div,
+.shipping-info > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.checkout-container label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.checkout-container input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+
+  font-size: 1rem;
+  color: #111827;
+  background: #f9fafb;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.checkout-container input::placeholder {
+  color: #9ca3af;
+}
+
+.checkout-container input:hover {
+  border-color: #a5b4fc;
+}
+
+.checkout-container input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+}
+
+/* red border only after the user typed something invalid (e.g. bad email) */
+.checkout-container input:not(:placeholder-shown):invalid {
+  border-color: #f87171;
+}
+
+/* ===== Place Order button ===== */
+
+.checkout-container form > button {
+  padding: 16px 24px;
+
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.checkout-container form > button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.4);
+}
+
+.checkout-container form > button:active {
+  transform: translateY(0);
+}
+
+.checkout-container form > button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.3);
+}
+
+/* ===== Order summary (receipt style, right column) ===== */
+
+.order-summary {
+  grid-column: 2;
+  grid-row: 3; /* same row as the form */
+  position: sticky;
+  top: 90px; /* stays below the sticky navbar */
+
+  background: #ffffff;
+  border-radius: 16px;
+  border-top: 6px solid #4f46e5;
+  padding: 28px 26px 26px;
+  box-shadow: 0 12px 40px rgba(17, 24, 39, 0.1);
+}
+
+.order-summary h2 {
+  margin: 0 0 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px dashed #e5e7eb;
+
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #111827;
+}
+
+/* ----- Items ----- */
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+  max-height: 340px;
+  overflow-y: auto;
+  margin-bottom: 8px;
+}
+
+.order-item {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 16px;
+  align-items: center;
+
+  padding: 16px 0;
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-item img {
+  width: 72px;
+  height: 72px;
+  padding: 8px;
+  box-sizing: border-box;
+
+  object-fit: contain;
+  background: #f9fafb;
+  border-radius: 12px;
+}
+
+.order-item > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 12px;
+  row-gap: 4px;
+  align-items: center;
+  min-width: 0;
+}
+
+.order-item h3 {
+  grid-column: 1 / -1;
+  margin: 0 0 4px;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #111827;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.order-item p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Quantity line becomes a small pill */
+.order-item p:nth-of-type(2) {
+  justify-self: start;
+  padding: 2px 10px;
+
+  background: #eef2ff;
+  color: #4f46e5;
+  border-radius: 50px;
+
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* Subtotal line sits on the right as the strongest number */
+.order-item p:nth-of-type(3) {
+  grid-column: 2;
+  grid-row: 2 / span 2;
+  align-self: center;
+
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  text-align: right;
+}
+
+/* ----- Totals ----- */
+
+.order-totals {
+  margin-top: 8px;
+  padding-top: 18px;
+  border-top: 2px dashed #e5e7eb;
+}
+
+.order-totals p {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+.order-totals h3 {
+  margin: 18px 0 0;
+  padding: 16px 18px;
+
+  background: linear-gradient(135deg, #14213d 0%, #4f46e5 100%);
+  color: #ffffff;
+  border-radius: 12px;
+
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 10px 24px -10px rgba(79, 70, 229, 0.6);
+}
+
+/* ===== Tablet: summary moves under the form ===== */
+
+@media (max-width: 900px) {
+  .checkout-container {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-container > form,
+  .order-summary {
+    grid-column: 1;
+  }
+
+  .order-summary {
+    grid-row: auto;
+    position: static;
+    margin-top: 28px;
+  }
+}
+
+/* ===== Mobile ===== */
+
+@media (max-width: 600px) {
+  .checkout-container {
+    padding: 24px 12px 48px;
+  }
+
+  .checkout-container > h1 {
+    font-size: 1.7rem;
+  }
+
+  .customer-information,
+  .shipping-info {
+    grid-template-columns: 1fr;
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  .order-summary {
+    padding: 22px 18px;
+  }
+
+  .order-item {
+    grid-template-columns: 60px 1fr;
+    gap: 12px;
+  }
+
+  .order-item img {
+    width: 60px;
+    height: 60px;
+  }
+}

@@ -1,23 +1,27 @@
-
 import { CartContext } from "../context/CartContex";
-
+import { Link } from "react-router-dom";
 import { useContext } from "react";
-import "../styles/cart.css"
+import "../styles/cart.css";
 function Cart() {
-  const {cart, removeFromCart,  increaseQuantity, decreaseQuantity} =  useContext(CartContext);
+  const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
+    useContext(CartContext);
 
+  const totalPrice = cart.reduce((acc, item) => {
+    return acc + item.price * item.quantity;
+  }, 0);
 
-  const totalPrice = cart.reduce((acc, item)=>{
-    return  acc + item.price * item.quantity;
-  },0);
-
-if(cart.length === 0){
-  return <div>
-    <h1>Welcome to your shopping cart</h1>
-    <p>Your cart is currently empty</p>
-  </div>
-}
-return (
+  if (cart.length === 0) {
+    return (
+  <div className="cart-empty">
+      <h1>Welcome to your shopping cart</h1>
+      <p>Your cart is currently empty</p>
+      <Link to="/products" className="cart-empty-btn">
+        Start Shopping
+      </Link>
+    </div>
+    );
+  }
+  return (
     <div className="cart-container">
       <h1>Your Shopping Cart</h1>
 
@@ -31,39 +35,27 @@ return (
 
               <p>Price: ${item.price.toFixed(2)}</p>
 
-            
               <div>
-                <button onClick={()=>decreaseQuantity(item.id)}> 
-                  -
-                </button>
+                <button onClick={() => decreaseQuantity(item.id)}>-</button>
                 <span>{item.quantity}</span>
-                <button onClick={()=>increaseQuantity(item.id)}>
-                  +
-                </button>
+                <button onClick={() => increaseQuantity(item.id)}>+</button>
               </div>
 
-              <p>
-                Subtotal: $
-                {(item.price * item.quantity).toFixed(2)}
-              </p>
+              <p>Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
 
-              <button
-                onClick={() => removeFromCart(item.id)}
-              >
-                Remove
-              </button>
+              <button onClick={() => removeFromCart(item.id)}>Remove</button>
             </div>
           </div>
         ))}
       </div>
 
-      <h2 className="cart-total">
-        Total: ${totalPrice.toFixed(2)} USD
-      </h2>
+      <h2 className="cart-total">Total: ${totalPrice.toFixed(2)} NZD</h2>
+      {/* Navigate to checkout when the cart contains products. */}
+      <Link to="/checkout" className="checkout-btn">
+        Proceed to Checkout →
+      </Link>
     </div>
   );
-
-
 }
 
 export default Cart;
