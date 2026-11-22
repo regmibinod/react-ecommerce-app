@@ -4,6 +4,7 @@ import "../styles/products.css";
 import ProductCard from "../components/ProductCard";
 
 function Products() {
+  
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
