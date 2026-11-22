@@ -1,16 +1,78 @@
-# React + Vite
+# 🛒 ABShopZone – E-commerce Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive e-commerce web application built with React.js and JavaScript. This project demonstrates front-end development skills through product browsing, searching, shopping cart management, and checkout functionality.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Browse products from an external API.
+- Search and filter products.
+- View product details.
+- Add products to the shopping cart.
+- Increase and decrease product quantities.
+- Remove products from the cart.
+- Calculate the total shopping cart price.
+- Checkout page.
+- Responsive user interface.
+- Navigation using React Router.
 
-## React Compiler
+## 🛠️ Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React.js
+- JavaScript (ES6+)
+- HTML5
+- CSS3
+- React Router
+- React Context API
+- Vite
+- Fake Store API
+- Git and GitHub
 
-## Expanding the ESLint configuration
+## 📸 Screenshots
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Screenshots of the application will be added here.
+
+## ⚙️ Installation and Setup
+
+Follow these steps to run the project locally.
+
+### 1. Clone the repository
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+```
+
+### 2. Navigate to the project directory
+
+```bash
+cd ABShopZone
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the development server
+
+```bash
+npm run dev
+```
+
+Open the local URL displayed in your terminal to view the application.
+
+## 🌐 Live Demo
+
+Coming soon.
+
+## 👨‍💻 Author
+
+Binod Regmi
+
+GitHub: https://github.com/regmibinod
+
+LinkedIn: https://www.linkedin.com/in/binod-binod-484394170/
+
+---
+
+Developed as a personal project to strengthen my React.js and front-end development skills.
