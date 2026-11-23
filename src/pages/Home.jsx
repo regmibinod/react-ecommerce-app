@@ -20,8 +20,8 @@ function Home() {
     <div>
       <h1>Welcome to ShopZone</h1>
       <p>Discover amazing products at great prices.</p>
-<Products />
-      <div className="display">
+      <Products />
+      {/* <div className="display">
         <h2>This is a test check out page</h2>
         <form onSubmit={handleSubmit}>
           <label htmlFor="fullName">Full Name:</label>
@@ -53,7 +53,7 @@ function Home() {
           />
           <button type="submit">Place a onder</button>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 }
