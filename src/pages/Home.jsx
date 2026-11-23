@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "../styles/home.css";
-
+import Products from "./Products";
 function Home() {
   const [customer, setCutomer] = useState({
     fullName: "",
@@ -20,7 +20,7 @@ function Home() {
     <div>
       <h1>Welcome to ShopZone</h1>
       <p>Discover amazing products at great prices.</p>
-
+<Products />
       <div className="display">
         <h2>This is a test check out page</h2>
         <form onSubmit={handleSubmit}>
