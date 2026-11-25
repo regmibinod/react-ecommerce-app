@@ -3,6 +3,7 @@ import { useContext } from "react";
 import "../styles/navbar.css";
 import { CartContext } from "../context/CartContex";
 import { FavouriteContext } from "../context/FavouriteContext";
+
 function Navbar() {
   const { cart } = useContext(CartContext);
   const { favourites } = useContext(FavouriteContext);
@@ -35,6 +36,9 @@ function Navbar() {
         </li>
         <li>
           <NavLink to="/about">About</NavLink>
+        </li>
+        <li>
+          <NavLink to="/orders">My Orders</NavLink>
         </li>
       </ul>
       {/* Favourite and shopping cart icons */}

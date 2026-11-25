@@ -4,9 +4,13 @@ import "../styles/orderconfirmation.css";
 function OrderConfirmation() {
   // Retrieve order information passed from the checkout page.
   const location = useLocation();
-  console.log(location.pathname)
-  const order = location.state?.order;
-console.log(order)
+
+  // Retrieve the order  passed through React Router
+  const navigationOrder = location.state?.order;
+
+// Retrieve previously saved orders from localStorage.
+const savedOrders = JSON.parse(localStorage.getItem("orders") || []);
+const order = navigationOrder || savedOrders[savedOrders.length-1];
   // Prevent direct access when no order information is available.
   if (!order) {
     return (
@@ -102,7 +106,7 @@ console.log(order)
           </div>
           <div className="oc-row oc-total">
             <span>Total</span>
-            <span>${order.total.toFixed(2)} NZD</span>
+            <span>${order.total.toFixed(2)} USD</span>
           </div>
         </div>
       </div>
