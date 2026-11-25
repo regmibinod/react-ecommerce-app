@@ -9,12 +9,17 @@ import Favourites from "./pages/Favourites";
 import ProductDetails from "./pages/ProductDetails";
 import Checkout from "./pages/Checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
-import TestHome from "./pages/TestHome";
+import OrderHistory from "./pages/OrderHistory";
+import OrderDetails from "./pages/orderdetails";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminOrders from "./pages/AdminOrders";
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
+        <Route path="/admin/orders" element={<AdminOrders />} />
+        <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/categories" element={<Categories />} />
@@ -24,9 +29,8 @@ function App() {
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/orderconfirmation" element={<OrderConfirmation />} />
-        <Route path="/testhome" element={<TestHome />}/>
-
-
+        <Route path="/orders" element={<OrderHistory />} />
+        <Route path="/orders/:id" element={<OrderDetails />} />
       </Routes>
     </>
   );

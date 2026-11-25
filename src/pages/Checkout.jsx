@@ -5,6 +5,7 @@ import OrderSummary from "../components/OrderSummary";
 import { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { CartContext } from "../context/CartContex";
+import { saveOrder } from "../services/orderStorage";
 function Checkout() {
   const [customer, setCustomer] = useState({
     fullName: "",
@@ -56,9 +57,11 @@ function Checkout() {
       subtotal,
       shippingCost,
       total,
+      status:"Processing",
       orderDate: new Date().toISOString(),
     };
-
+    // Save the new order using our reusable order storage service
+    saveOrder(order);
     // Clear the cart after creating the order.
     clearCart();
 

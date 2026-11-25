@@ -1,0 +1,264 @@
+/* admindashboard.css */
+
+.admin-dashboard {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+.admin-dashboard h1 {
+  margin: 0 0 12px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 800;
+  color: #111827;
+}
+
+/* ---------- Refresh button ---------- */
+.admin-dashboard > button {
+  display: block;
+  margin: 0 auto 12px;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2563eb;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.admin-dashboard > button:hover {
+  color: #fff;
+  background: #2563eb;
+}
+
+/* Welcome text (direct child only, so stat cards are not affected) */
+.admin-dashboard > p {
+  margin: 0 0 32px;
+  text-align: center;
+  font-size: 16px;
+  color: #6b7280;
+}
+
+/* ---------- Stat cards grid ---------- */
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  padding: 20px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.stat-card p {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  color: #111827;
+}
+
+/* Colored top border: main cards, in the order they appear */
+.stat-card:nth-child(1) { border-top: 4px solid #2563eb; } /* Total Orders */
+.stat-card:nth-child(2) { border-top: 4px solid #059669; } /* Total Revenue */
+.stat-card:nth-child(3) { border-top: 4px solid #d97706; } /* Processing */
+.stat-card:nth-child(4) { border-top: 4px solid #3b82f6; } /* Shipped */
+.stat-card:nth-child(5) { border-top: 4px solid #10b981; } /* Delivered */
+.stat-card:nth-child(6) { border-top: 4px solid #dc2626; } /* Cancelled */
+.stat-card:nth-child(7) { border-top: 4px solid #7c3aed; } /* Average Order Value */
+
+/* ---------- Revenue breakdown ---------- */
+/* This block sits INSIDE the stats grid, so make it span the full row */
+.revenue-breakdown {
+  grid-column: 1 / -1;
+  padding: 20px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.revenue-breakdown h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  color: #111827;
+}
+
+/* The nested grid needs no extra bottom space */
+.revenue-breakdown .dashboard-stats {
+  margin-bottom: 0;
+}
+
+/* Override the nth-child colors for the three breakdown cards */
+.revenue-breakdown .stat-card:nth-child(1) { border-top: 4px solid #d97706; }
+.revenue-breakdown .stat-card:nth-child(2) { border-top: 4px solid #3b82f6; }
+.revenue-breakdown .stat-card:nth-child(3) { border-top: 4px solid #10b981; }
+
+.revenue-breakdown .stat-card p {
+  font-size: 24px;
+}
+
+/* ---------- Recent orders ---------- */
+.recent-orders {
+  margin-bottom: 32px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow-x: auto;
+}
+
+.recent-orders h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  color: #111827;
+}
+
+/* "No orders" message */
+.recent-orders > p {
+  margin: 0;
+  font-size: 15px;
+  color: #6b7280;
+}
+
+.recent-orders table {
+  width: 100%;
+  min-width: 650px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.recent-orders th {
+  padding: 12px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  background: #f9fafb;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.recent-orders td {
+  padding: 14px 12px;
+  color: #374151;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: middle;
+}
+
+.recent-orders tbody tr {
+  transition: background 0.15s;
+}
+
+.recent-orders tbody tr:hover {
+  background: #f5f8ff;
+}
+
+.recent-orders tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Order ID column */
+.recent-orders td:first-child {
+  font-family: monospace;
+  font-size: 13px;
+  color: #111827;
+  word-break: break-all;
+}
+
+/* Customer name */
+.recent-orders td:nth-child(2) {
+  font-weight: 600;
+}
+
+/* Total */
+.recent-orders td:nth-child(4) {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* View Details link */
+.recent-orders td a {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2563eb;
+  background: #eff6ff;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.recent-orders td a:hover {
+  color: #fff;
+  background: #2563eb;
+}
+
+/* ---------- Status badges ---------- */
+.status {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+}
+
+.status-processing { background: #fef3c7; color: #92400e; }
+.status-shipped    { background: #dbeafe; color: #1e40af; }
+.status-delivered  { background: #d1fae5; color: #065f46; }
+.status-cancelled  { background: #fee2e2; color: #991b1b; }
+
+/* ---------- Manage orders button ---------- */
+/* Direct child only, so the table links are not affected */
+.admin-dashboard > a {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 12px 24px;
+  font-weight: 600;
+  color: #fff;
+  background: #2563eb;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.admin-dashboard > a:hover {
+  background: #1d4ed8;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 600px) {
+  .admin-dashboard h1 {
+    font-size: 26px;
+  }
+
+  .stat-card p {
+    font-size: 24px;
+  }
+}
