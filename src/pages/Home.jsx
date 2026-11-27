@@ -1,76 +1,82 @@
-import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Products from "./Products";
 import "../styles/home.css";
-import { useNavigate } from "react-router-dom";
-
 
 function Home() {
-
-
-
-  const [customer, setCutomer] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-  });
-
-  const handleChange = (event) => {
-
-const name = event.target;
-const value = event.target.value;
-
-// const {name, value} = event.target;
-    setCutomer((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-  const navigate = useNavigate();
-
-  const handleTest = ()=>{
-    const person = {name:"Binod", phone:"02262565544", email:"binodregmi@gmail.com"}
-    navigate("/testhome",{state: {person}} )
-  }
   return (
-    <div>
-      <h1>Welcome to ShopZone</h1>
-      <p>Discover amazing products at great prices.</p>
+    <div className="home-page">
+      {/* Hero section */}
+      <section className="home-hero">
+        <div className="hero-content">
+          <span className="hero-label">WELCOME TO BinodShopZone</span>
 
-       <div className="display">
-        <h2>This is a test check out page</h2>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="fullName">Full Name:</label>
-          <input
-            type="text"
-            name="fullName"
-            id="fullName"
-            onChange={handleChange}
-            value={customer.fullName}
-            placeholder="Please enter a full name"
-          />
-          <label htmlFor="email">Email: </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={customer.email}
-            placeholder="please enter email"
-            onChange={handleChange}
-          />
-          <label htmlFor="phone">phone: </label>
-          <input
-            type="tel"
-            id="phone"
-            placeholder="enter a phone numer"
-            name="phone"
-            value={customer.phone}
-            onChange={handleChange}
-          />
-          <button type="submit">Place a onder</button>
-        </form>
-      </div> 
+          <h1>
+            Discover Products
+            <span> You'll Love.</span>
+          </h1>
 
-      <button onClick={handleTest}>Send Data</button>
+          <p>
+            Explore our collection of products and discover something
+            special for yourself. Shopping made simple, convenient
+            and enjoyable.
+          </p>
+
+          <div className="hero-buttons">
+            <Link to="/products" className="hero-btn primary-btn">
+              Shop Now
+            </Link>
+
+            <Link to="/categories" className="hero-btn secondary-btn">
+              Explore Categories
+            </Link>
+          </div>
+        </div>
+
+        <div className="hero-decoration">
+          <div className="hero-circle">
+            <span>🛍️</span>
+          </div>
+          <div className="hero-small-circle">✨</div>
+        </div>
+      </section>
+
+      {/* Shopping benefits */}
+      <section className="home-benefits">
+        <div className="benefit-item">
+          <span>🚚</span>
+          <div>
+            <h3>Convenient Shopping</h3>
+            <p>Browse products with ease.</p>
+          </div>
+        </div>
+
+        <div className="benefit-item">
+          <span>🔒</span>
+          <div>
+            <h3>Simple Checkout</h3>
+            <p>Enjoy a straightforward checkout experience.</p>
+          </div>
+        </div>
+
+        <div className="benefit-item">
+          <span>💳</span>
+          <div>
+            <h3>Easy Ordering</h3>
+            <p>Manage your shopping cart effortlessly.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured products */}
+      <section className="home-products">
+        <div className="home-section-heading">
+          <span>OUR COLLECTION</span>
+          <h2>Explore Our Products</h2>
+          <p>Find something that matches your style and needs.</p>
+        </div>
+
+        <Products />
+      </section>
     </div>
   );
 }

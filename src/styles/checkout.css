@@ -99,7 +99,7 @@
   border: 1.5px solid #e5e7eb;
   border-radius: 12px;
 
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .checkout-container input::placeholder {
@@ -348,5 +348,87 @@
   .order-item img {
     width: 60px;
     height: 60px;
+  }
+}
+
+
+/* ===== Checkout empty cart state ===== */
+
+.checkout-empty {
+  max-width: 650px;
+  margin: 80px auto;
+  padding: 60px 24px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.checkout-empty-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.checkout-empty h1 {
+  margin-bottom: 12px;
+  color: #111827;
+  font-size: 2rem;
+}
+
+.checkout-empty p {
+  margin-bottom: 28px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.checkout-empty-button {
+  display: inline-block;
+  padding: 14px 28px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.checkout-empty-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+}
+
+/* ===== Checkout description ===== */
+
+.checkout-description {
+  line-height: 1.6;
+}
+
+/* ===== Checkout form section headings ===== */
+
+.customer-information > h2 {
+  grid-column: 1 / -1;
+  margin: 0 0 4px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 1.3rem;
+  color: #111827;
+}
+
+/* ===== Checkout submit button ===== */
+
+.checkout-submit-button {
+  width: 100%;
+}
+
+/* ===== Empty state mobile layout ===== */
+
+@media (max-width: 600px) {
+  .checkout-empty {
+    margin: 40px 12px;
+    padding: 45px 20px;
+  }
+
+  .checkout-empty h1 {
+    font-size: 1.6rem;
   }
 }

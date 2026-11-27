@@ -1,11 +1,14 @@
-import { useState } from "react";
+
+import { useState, useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
 import "../styles/checkout.css";
 import countries from "../data/countries";
 import OrderSummary from "../components/OrderSummary";
-import { useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+
 import { CartContext } from "../context/CartContex";
 import { saveOrder } from "../services/orderStorage";
+
 function Checkout() {
   const [customer, setCustomer] = useState({
     fullName: "",
@@ -17,21 +20,23 @@ function Checkout() {
     country: "",
   });
 
-  // Access the cart information and access the function to clear cart
-
+  // Access cart information and the function to clear the cart.
   const { cart, clearCart } = useContext(CartContext);
 
   // Allow navigation to the order confirmation page.
-
   const navigate = useNavigate();
 
-  // Update corresponding field whenever the customer types.
+  // Update the corresponding customer field whenever the user types.
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setCustomer((prevCustomer) => ({ ...prevCustomer, [name]: value }));
+
+    setCustomer((prevCustomer) => ({
+      ...prevCustomer,
+      [name]: value,
+    }));
   };
 
-  //   Validate the form before allowing checkout to continue.
+  // Validate the form and create a new order.
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -49,7 +54,7 @@ function Checkout() {
     const shippingCost = 20;
     const total = subtotal + shippingCost;
 
-    // Create an order object containing customer and product information.
+    // Create an order containing customer and product information.
     const order = {
       id: `ORD-${Date.now()}`,
       customer: { ...customer },
@@ -57,39 +62,57 @@ function Checkout() {
       subtotal,
       shippingCost,
       total,
-      status:"Processing",
+      status: "Processing",
       orderDate: new Date().toISOString(),
     };
-    // Save the new order using our reusable order storage service
+
+    // Save the order using our reusable storage service.
     saveOrder(order);
-    // Clear the cart after creating the order.
+
+    // Clear the cart after successfully creating the order.
     clearCart();
 
-    // Navigate to confirmation and pass the order information.
+    // Navigate to the confirmation page with the order information.
     navigate("/orderconfirmation", {
       state: { order },
     });
   };
-  // End of handle submit function
 
-  // Redirect customers to shopping if their cart is empty.
+  // Redirect customers to the products page if their cart is empty.
   if (cart.length === 0) {
     return (
-      <div>
+      <div className="checkout-empty">
+        <div className="checkout-empty-icon">🛒</div>
+
         <h1>Your cart is empty</h1>
-        <p>Add some products before checking out.</p>
-        <Link to="/products">Browse Products</Link>
+
+        <p>
+          You need to add some products before proceeding to checkout.
+        </p>
+
+        <Link to="/products" className="checkout-empty-button">
+          Browse Products
+        </Link>
       </div>
     );
   }
+
   return (
     <div className="checkout-container">
-      <h1>Checkout Page</h1>
-      <p>Complete your information to place your order.</p>
+      <h1>Secure Checkout</h1>
+
+      <p className="checkout-description">
+        Complete your information below to place your order.
+      </p>
+
       <form onSubmit={handleSubmit}>
-        <div className="customer-information">
+        {/* Customer contact information */}
+        <section className="customer-information">
+          <h2>Contact Information</h2>
+
           <div>
             <label htmlFor="fullName">Full Name</label>
+
             <input
               type="text"
               id="fullName"
@@ -97,21 +120,29 @@ function Checkout() {
               value={customer.fullName}
               onChange={handleChange}
               placeholder="Enter your full name"
+              autoComplete="name"
+              required
             />
           </div>
+
           <div>
             <label htmlFor="email">Email Address</label>
+
             <input
               type="email"
+              id="email"
               name="email"
               value={customer.email}
-              placeholder="Enter your email"
-              id="email"
               onChange={handleChange}
+              placeholder="Enter your email address"
+              autoComplete="email"
+              required
             />
           </div>
+
           <div>
             <label htmlFor="phone">Phone Number</label>
+
             <input
               type="tel"
               id="phone"
@@ -119,58 +150,64 @@ function Checkout() {
               value={customer.phone}
               onChange={handleChange}
               placeholder="Enter your phone number"
+              autoComplete="tel"
+              required
             />
           </div>
-        </div>
-        {/* Shipping Information */}
-        <div className="shipping-info">
+        </section>
+
+        {/* Customer shipping information */}
+        <section className="shipping-info">
           <h2>Shipping Information</h2>
+
           <div>
             <label htmlFor="address">Street Address</label>
+
             <input
               type="text"
+              id="address"
               name="address"
               value={customer.address}
               onChange={handleChange}
-              id="address"
               placeholder="Enter your street address"
+              autoComplete="street-address"
+              required
             />
           </div>
+
           <div>
             <label htmlFor="city">City</label>
+
             <input
               type="text"
               id="city"
               name="city"
               value={customer.city}
               onChange={handleChange}
-              placeholder="Enter your city."
+              placeholder="Enter your city"
+              autoComplete="address-level2"
+              required
             />
           </div>
+
           <div>
             <label htmlFor="postcode">Postcode</label>
+
             <input
               type="text"
               id="postcode"
               name="postcode"
               value={customer.postcode}
               onChange={handleChange}
-              placeholder="Enter your postcode."
+              placeholder="Enter your postcode"
+              autoComplete="postal-code"
+              required
             />
           </div>
-          {/* <div>
-            <label htmlFor="country">Country</label>
-            <input
-              type="text"
-              id="country"
-              name="country"
-              value={customer.country}
-              onChange={handleChange}
-              placeholder="Enter your country."
-            />
-          </div> */}
+
           <div>
             <label htmlFor="country">Country</label>
+
             <input
               type="text"
               id="country"
@@ -180,6 +217,7 @@ function Checkout() {
               placeholder="Start typing your country..."
               list="country-list"
               autoComplete="country-name"
+              required
             />
 
             <datalist id="country-list">
@@ -188,10 +226,14 @@ function Checkout() {
               ))}
             </datalist>
           </div>
-        </div>
+        </section>
 
-        <button type="submit">Place Order</button>
+        <button type="submit" className="checkout-submit-button">
+          Place Order
+        </button>
       </form>
+
+      {/* Display the customer's order details and total. */}
       <OrderSummary />
     </div>
   );
