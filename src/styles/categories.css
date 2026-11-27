@@ -1,45 +1,123 @@
 .category-container {
   max-width: 1200px;
-  margin: 40px auto;
+  margin: 60px auto;
   padding: 20px;
+}
+
+/* Category page heading */
+.category-heading {
   text-align: center;
+  margin-bottom: 45px;
 }
 
-.category-container h1 {
-  margin-bottom: 10px;
+.category-heading > span {
+  color: #6366f1;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
 }
 
-.category-container p {
-  color: #555;
+.category-heading h1 {
+  color: #1e293b;
+  font-size: 38px;
+  margin: 12px 0;
 }
 
+.category-heading p {
+  color: #64748b;
+  font-size: 16px;
+}
+
+/* Responsive category grid */
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  margin-top: 30px;
-  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px;
 }
 
+/* Individual category card */
 .category-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 270px;
+  padding: 30px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffffff, #f1f5f9);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .category-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-7px);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
 }
 
+/* Category icon */
 .category-icon {
-  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
+  height: 65px;
+  border-radius: 16px;
+  background: #e0e7ff;
+  font-size: 34px;
+  margin-bottom: 20px;
 }
 
 .category-card h2 {
-  margin: 15px 0;
+  color: #1e293b;
+  font-size: 22px;
+  margin: 0 0 12px;
 }
 
 .category-card p {
-  color: #666;
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 0 18px;
+}
+
+/* Number of products in each category */
+.category-count {
+  color: #6366f1;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+/* Explore category link */
+.category-link {
+  color: #4338ca;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: auto;
+}
+
+/* Tablet and mobile layouts */
+@media (max-width: 768px) {
+  .category-container {
+    margin: 35px auto;
+  }
+
+  .category-heading h1 {
+    font-size: 30px;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-card {
+    padding: 23px;
+  }
+
+  .category-heading h1 {
+    font-size: 26px;
+  }
 }

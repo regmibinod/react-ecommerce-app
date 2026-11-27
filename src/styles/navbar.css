@@ -1,6 +1,5 @@
-/* ===== Navbar ===== */
-
-nav {
+/* Main navbar */
+.main-navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -14,8 +13,7 @@ nav {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
-/* ===== Logo ===== */
-
+/* Website logo */
 .logo h2 {
   margin: 0;
   color: #2563eb;
@@ -23,17 +21,18 @@ nav {
   font-weight: 700;
 }
 
-/* ===== Navigation Links ===== */
-
-nav ul {
+/* Navigation links */
+.nav-links {
   display: flex;
+  align-items: center;
   gap: 25px;
+
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-nav ul li a {
+.nav-links li a {
   text-decoration: none;
   color: #333;
   font-size: 1rem;
@@ -41,20 +40,18 @@ nav ul li a {
   transition: color 0.3s ease;
 }
 
-nav ul li a:hover,
-nav ul li a.active {
+.nav-links li a:hover,
+.nav-links li a.active {
   color: #2563eb;
 }
 
-/* ===== Icons Section (favourites + cart) ===== */
-
+/* Favourite and shopping cart icons */
 .nav-icons {
   display: flex;
   align-items: center;
   gap: 28px;
 }
 
-/* both icon links need position: relative for the badge */
 .nav-icons a {
   position: relative;
   display: flex;
@@ -74,8 +71,7 @@ nav ul li a.active {
   color: #2563eb;
 }
 
-/* ===== Count badge (shared by favourites and cart) ===== */
-
+/* Cart and favourite count badges */
 .nav-icons a span {
   position: absolute;
   top: -10px;
@@ -99,23 +95,84 @@ nav ul li a.active {
   line-height: 1;
 }
 
-/* favourites badge in pink, cart badge stays red */
 .nav-icons a:first-child span {
   background: #22a162;
 }
 
-/* ===== Mobile ===== */
+/* Hide hamburger button on desktop */
+.menu-toggle {
+  display: none;
+  border: none;
+  background: transparent;
+  font-size: 27px;
+  cursor: pointer;
+  color: #1e293b;
+}
 
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    gap: 15px;
-    padding: 15px;
+/* Tablet and mobile navigation */
+@media (max-width: 900px) {
+  .main-navbar {
+    position: sticky;
+    padding: 15px 20px;
   }
 
-  nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
+  .logo h2 {
+    font-size: 1.5rem;
+  }
+
+  /* Hide navigation links until menu is opened */
+  .nav-links {
+    display: none;
+  }
+
+  /* Display the menu when hamburger is clicked */
+  .nav-links.nav-links-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    padding: 10px 20px 20px;
+    background: #ffffff;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-links li a {
+    display: block;
+    padding: 13px 5px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  /* Show hamburger button */
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* Smaller mobile screens */
+@media (max-width: 480px) {
+  .main-navbar {
+    padding: 14px 15px;
+  }
+
+  .logo h2 {
+    font-size: 1.3rem;
+  }
+
+  .nav-icons {
+    gap: 20px;
+  }
+
+  .nav-icons a {
+    font-size: 1.3rem;
+  }
+
+  .menu-toggle {
+    font-size: 24px;
   }
 }

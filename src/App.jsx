@@ -13,10 +13,13 @@ import OrderHistory from "./pages/OrderHistory";
 import OrderDetails from "./pages/orderdetails";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminOrders from "./pages/AdminOrders";
+import Footer from "./components/Footer";
+import AdminProducts from "./pages/AdminProducts";
 function App() {
   return (
     <>
       <Navbar />
+
       <Routes>
         <Route path="/admin/orders" element={<AdminOrders />} />
         <Route path="/admin" element={<AdminDashboard />} />
@@ -31,7 +34,11 @@ function App() {
         <Route path="/orderconfirmation" element={<OrderConfirmation />} />
         <Route path="/orders" element={<OrderHistory />} />
         <Route path="/orders/:id" element={<OrderDetails />} />
+        <Route path="/admin/products" element={<AdminProducts />} />
+        
       </Routes>
+
+      <Footer />
     </>
   );
 }

@@ -1,57 +1,84 @@
-import { act } from "react";
+// Check whether an admin product catalogue has already been created.
+export const hasStoredProducts = () => {
+  return localStorage.getItem("adminProducts") !== null;
+};
 
-// Retrieve admin managed Products from Local-Storage
+// Retrieve admin-managed products from LocalStorage.
 export const getStoredProducts = () => {
   try {
-    const storeProducts = localStorage.getItem("adminProducts");
-    return storeProducts ? JSON.parse(storeProducts) : [];
+    const storedProducts = localStorage.getItem("adminProducts");
+
+    return storedProducts ? JSON.parse(storedProducts) : [];
   } catch (error) {
-    console.log("Error retrieving the store product", error);
+    console.error("Error retrieving products:", error);
     return [];
   }
 };
 
 // Save admin-managed products to LocalStorage.
-
 export const saveStoredProducts = (products) => {
   try {
     localStorage.setItem("adminProducts", JSON.stringify(products));
   } catch (error) {
-    console.log("Error saving products:", error);
-    throw new error("Unable to save products. Please try again.");
+    console.error("Error saving products:", error);
+
+    throw new Error("Unable to save products. Please try again.");
   }
 };
 
-// Add a new product while preserving previously stored products.
-
+// Add a new product while preserving existing products.
 export const addProduct = (product) => {
-  try {
-    const previousProducts = getStoredProducts();
-    const updatedProducts = [...previousProducts, product];
-    saveStoredProducts(updatedProducts);
-    return [];
-  } catch (error) {
-    console.error("Error adding product:", error);
+  const previousProducts = getStoredProducts();
 
-    throw error;
+  // Prevent duplicate product IDs.
+  const productExists = previousProducts.some(
+    (item) => String(item.id) === String(product.id),
+  );
+
+  if (productExists) {
+    throw new Error("A product with this ID already exists.");
   }
+
+  const updatedProducts = [...previousProducts, product];
+
+  saveStoredProducts(updatedProducts);
+
+  return updatedProducts;
 };
 
-// Update an existing product using it ID.
-
+// Update an existing product using its ID.
 export const updateProduct = (updatedProduct) => {
-  try {
-    const previousProducts = getStoredProducts();
-    const updatedProducts = previousProducts.map((product) =>
-      product.id === updatedProduct.id ? updateProduct : product,
-    );
-    saveStoredProducts(updatedProducts);
-    return updatedProducts;
-  } catch (error) {
-    console.log("Error updating   product", error);
+  const previousProducts = getStoredProducts();
+
+  // Check whether the product exists.
+  const productExists = previousProducts.some(
+    (product) => String(product.id) === String(updatedProduct.id),
+  );
+
+  if (!productExists) {
+    throw new Error("Product not found.");
   }
+
+  const updatedProducts = previousProducts.map((product) =>
+    String(product.id) === String(updatedProduct.id)
+      ? updatedProduct
+      : product,
+  );
+
+  saveStoredProducts(updatedProducts);
+
+  return updatedProducts;
 };
 
+// Delete a product using its ID.
+export const deleteProduct = (productId) => {
+  const previousProducts = getStoredProducts();
 
-// Delete product using id 
+  const updatedProducts = previousProducts.filter(
+    (product) => String(product.id) !== String(productId),
+  );
 
+  saveStoredProducts(updatedProducts);
+
+  return updatedProducts;
+};

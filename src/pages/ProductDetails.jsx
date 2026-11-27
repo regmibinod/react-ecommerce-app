@@ -7,45 +7,68 @@ import "../styles/productdetails.css";
 function ProductDetails() {
   // Get the product ID from the URL.
   const { id } = useParams();
-  //   getting addToCart function from cartContext API
+
+  // Get the addToCart function from CartContext.
   const { addToCart } = useContext(CartContext);
 
-  // Store the selected product.
+  // Store product information and page status.
   const [product, setProduct] = useState(null);
-
-  // Track the API Loading status.
   const [loading, setLoading] = useState(true);
-
-  // Store any API Error Message
   const [error, setError] = useState("");
 
-  // Fetch the product details whenever the URL ID changes.
+  // Track the quantity selected by the customer.
+  const [quantity, setQuantity] = useState(1);
+
+  // Fetch product details whenever the URL ID changes.
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
         setError("");
+        setProduct(null);
+        setQuantity(1);
+
         const data = await getProductById(id);
         setProduct(data);
       } catch (error) {
         setError("Failed to load the product details.");
-        console.log("failed to fetch the product", error);
+        console.error("Failed to fetch the product:", error);
       } finally {
         setLoading(false);
       }
     };
+
     fetchProduct();
   }, [id]);
 
-  // Display Loading message while fetching product
+  // Increase the selected quantity.
+  const increaseQuantity = () => {
+    setQuantity((previous) => previous + 1);
+  };
+
+  // Prevent the quantity from going below one.
+  const decreaseQuantity = () => {
+    setQuantity((previous) => Math.max(1, previous - 1));
+  };
+
+  // Add the selected quantity to the shopping cart.
+  const handleAddToCart = () => {
+    for (let i = 0; i < quantity; i++) {
+      addToCart(product);
+    }
+  };
+
+  // Display loading status.
   if (loading) {
     return <p className="pd-status">Loading product details...</p>;
   }
-  // Display error message if fetching API fails.
+
+  // Display API error.
   if (error) {
     return <p className="pd-status pd-error">{error}</p>;
   }
-  // Display no product found message if the requested product does not exist
+
+  // Display a message when the product does not exist.
   if (!product) {
     return <p className="pd-status">No product details found.</p>;
   }
@@ -53,24 +76,73 @@ function ProductDetails() {
   return (
     <div className="product-details">
       <div className="pd-card">
+        {/* Product image */}
         <div className="pd-image-box">
-          <img className="pd-image" src={product.image} alt={product.title} />
+          <img
+            className="pd-image"
+            src={product.image}
+            alt={product.title}
+          />
         </div>
 
+        {/* Product information */}
         <div className="pd-info">
           <span className="pd-category">{product.category}</span>
+
           <h1 className="pd-title">{product.title}</h1>
 
-          <div className="pd-rating">
-            <span className="pd-stars">⭐ {product.rating.rate}</span>
-            <span className="pd-reviews">({product.rating.count} reviews)</span>
+          {/* Display rating only when available. */}
+          {product.rating && (
+            <div className="pd-rating">
+              <span className="pd-stars">
+                ⭐ {product.rating.rate}
+              </span>
+
+              <span className="pd-reviews">
+                ({product.rating.count} reviews)
+              </span>
+            </div>
+          )}
+
+          <p className="pd-price">
+            ${Number(product.price).toFixed(2)}
+          </p>
+
+          <p className="pd-description">{product.description}</p>
+
+          {/* Quantity selection */}
+          <div className="pd-quantity-section">
+            <span className="pd-quantity-label">Quantity:</span>
+
+            <div className="pd-quantity-control">
+              <button
+                type="button"
+                onClick={decreaseQuantity}
+                disabled={quantity === 1}
+                aria-label="Decrease quantity"
+              >
+                −
+              </button>
+
+              <span aria-live="polite">{quantity}</span>
+
+              <button
+                type="button"
+                onClick={increaseQuantity}
+                aria-label="Increase quantity"
+              >
+                +
+              </button>
+            </div>
           </div>
 
-          <p className="pd-price">${product.price}</p>
-          <p className="pd-description">{product.description}</p>
-          {/* Product purchase and navigation actions. */}
+          {/* Purchase and navigation actions */}
           <div className="pd-actions">
-            <button className="cart-btn" onClick={() => addToCart(product)}>
+            <button
+              type="button"
+              className="cart-btn"
+              onClick={handleAddToCart}
+            >
               🛒 Add to Cart
             </button>
 

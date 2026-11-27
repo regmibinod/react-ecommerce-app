@@ -29,9 +29,9 @@ function OrderSummary() {
 
             <div>
               <h3>{item.title}</h3>
-              <p>Price: ${item.price.toFixed(2)}</p>
+              <p>Price: ${item.price.toFixed(2)} NZD</p>
               <p>Quantity: {item.quantity}</p>
-              <p>Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
+              <p>Subtotal: ${(item.price * item.quantity).toFixed(2)} NZD</p>
             </div>
           </div>
         ))}
@@ -41,11 +41,11 @@ function OrderSummary() {
       <div className="order-totals">
         <p>
           <span>Subtotal</span>
-          <span>${subTotal.toFixed(2)}</span>
+          <span>${subTotal.toFixed(2)} NZD</span>
         </p>
         <p>
           <span>Shipping</span>
-          <span>${shippingCost.toFixed(2)}</span>
+          <span>${shippingCost.toFixed(2)} NZD</span>
         </p>
         <h3>Total: ${total.toFixed(2)} NZD</h3>
       </div>
