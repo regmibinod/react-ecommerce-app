@@ -36,6 +36,7 @@ function Home() {
           <div className="hero-circle">
             <span>🛍️</span>
           </div>
+
           <div className="hero-small-circle">✨</div>
         </div>
       </section>

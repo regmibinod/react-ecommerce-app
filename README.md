@@ -61,9 +61,7 @@ npm run dev
 
 Open the local URL displayed in your terminal to view the application.
 
-## 🌐 Live Demo
-
-Coming soon.
+## 🌐 Live Demo : https://regmibinod.github.io/react-ecommerce-app/
 
 ## 👨‍💻 Author
 
