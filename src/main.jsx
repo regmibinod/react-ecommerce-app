@@ -7,7 +7,7 @@ import { CartProvider } from "./context/CartContex.jsx";
 import { FavouriteProvider } from "./context/FavouriteContext.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter basename="/react-ecommerce-app">
+    <BrowserRouter >
       <CartProvider>
         <FavouriteProvider>
           <App />
