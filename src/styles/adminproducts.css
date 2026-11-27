@@ -1,0 +1,407 @@
+/* =========================================
+   ADMIN PRODUCTS - MAIN PAGE
+========================================= */
+
+.admin-products-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px 70px;
+  color: #1e293b;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.admin-products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.admin-products-header h1 {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.admin-products-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 15px;
+}
+
+.admin-products-header button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.admin-products-header button:hover {
+  background: #1d4ed8;
+}
+
+/* =========================================
+   SUCCESS AND ERROR MESSAGES
+========================================= */
+
+.admin-success-message,
+.admin-error-message {
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-success-message {
+  border: 1px solid #bbf7d0;
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.admin-error-message {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+/* =========================================
+   PRODUCT SUMMARY
+========================================= */
+
+.admin-products-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 22px;
+  margin-bottom: 25px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+.admin-products-summary h2 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 19px;
+}
+
+.admin-products-summary p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* =========================================
+   ADD / EDIT PRODUCT FORM
+========================================= */
+
+.admin-product-form-section {
+  padding: 28px;
+  margin-bottom: 30px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+.admin-product-form-section h2 {
+  margin: 0 0 25px;
+  color: #0f172a;
+  font-size: 22px;
+}
+
+.admin-product-form-section form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.admin-product-form-section form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-product-form-section form > div:nth-child(5) {
+  grid-column: 1 / -1;
+}
+
+.admin-product-form-section label {
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-product-form-section input,
+.admin-product-form-section textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1e293b;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-product-form-section input:focus,
+.admin-product-form-section textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.admin-product-form-section textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.admin-product-form-actions {
+  display: flex;
+  flex-direction: row !important;
+  gap: 12px !important;
+  grid-column: 1 / -1;
+  margin-top: 5px;
+}
+
+.admin-product-form-actions button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.admin-product-form-actions button:first-child:hover {
+  background: #1d4ed8;
+}
+
+.admin-product-form-actions button:last-child {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.admin-product-form-actions button:last-child:hover {
+  background: #cbd5e1;
+}
+
+/* =========================================
+   SEARCH AND CATEGORY FILTERS
+========================================= */
+
+.admin-products-filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.admin-products-filters input,
+.admin-products-filters select {
+  min-height: 46px;
+  padding: 11px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #334155;
+  font-size: 14px;
+  outline: none;
+}
+
+.admin-products-filters input {
+  flex: 1;
+}
+
+.admin-products-filters select {
+  min-width: 200px;
+  cursor: pointer;
+}
+
+.admin-products-filters input:focus,
+.admin-products-filters select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* =========================================
+   PRODUCTS TABLE
+========================================= */
+
+.admin-products-table-section {
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+.admin-products-table-section > p {
+  padding: 35px 20px;
+  color: #64748b;
+  text-align: center;
+}
+
+.admin-products-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-products-table-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+
+.admin-products-table-wrapper th,
+.admin-products-table-wrapper td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  text-align: left;
+  font-size: 14px;
+}
+
+.admin-products-table-wrapper th {
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.admin-products-table-wrapper tbody tr:hover {
+  background: #f8fafc;
+}
+
+.admin-products-table-wrapper tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Product images */
+.admin-products-table-wrapper td img {
+  display: block;
+  width: 55px;
+  height: 55px;
+  padding: 4px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  object-fit: contain;
+}
+
+/* Product action buttons */
+.admin-products-table-wrapper td button {
+  padding: 8px 14px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.admin-products-table-wrapper td button:first-child {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.admin-products-table-wrapper td button:first-child:hover {
+  background: #bfdbfe;
+}
+
+.admin-products-table-wrapper td button:last-child {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.admin-products-table-wrapper td button:last-child:hover {
+  background: #fecaca;
+}
+
+/* =========================================
+   TABLET RESPONSIVENESS
+========================================= */
+
+@media (max-width: 768px) {
+  .admin-products-page {
+    padding: 25px 16px 45px;
+  }
+
+  .admin-products-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-products-header h1 {
+    font-size: 27px;
+  }
+
+  .admin-product-form-section form {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-product-form-section form > div:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .admin-product-form-actions {
+    grid-column: auto;
+  }
+
+  .admin-products-summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+========================================= */
+
+@media (max-width: 500px) {
+  .admin-products-header button {
+    width: 100%;
+  }
+
+  .admin-products-filters {
+    flex-direction: column;
+  }
+
+  .admin-products-filters select {
+    width: 100%;
+  }
+
+  .admin-product-form-section {
+    padding: 20px;
+  }
+
+  .admin-product-form-actions {
+    flex-direction: column !important;
+  }
+
+  .admin-product-form-actions button {
+    width: 100%;
+  }
+
+  .admin-products-table-wrapper th,
+  .admin-products-table-wrapper td {
+    padding: 12px;
+  }
+}

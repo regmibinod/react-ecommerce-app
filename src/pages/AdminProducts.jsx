@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../styles/adminproducts.css";
 import {
   getProducts,
 } from "../services/productApi";
