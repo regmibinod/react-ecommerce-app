@@ -1,8 +1,8 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
-// https://vite.dev/config/
+// Configure Vite for deployment at the domain root.
 export default defineConfig({
   plugins: [react()],
-  base: '/react-ecommerce-app/',
+  base: '/',
 })
