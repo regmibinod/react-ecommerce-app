@@ -61,7 +61,7 @@ npm run dev
 
 Open the local URL displayed in your terminal to view the application.
 
-## 🌐 Live Demo : https://regmibinod.github.io/react-ecommerce-app/
+## 🌐 Live Demo : https://react-ecommerce-fta9cpoox-binod13.vercel.app/
 
 ## 👨‍💻 Author
 
